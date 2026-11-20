@@ -1,0 +1,92 @@
+/* pdf-sobre : sobre, classique, lisible. Papier blanc, encre presque noire, un seul accent bleu encre. Pas de violet, pas de dégradé, pas d'ombre. */
+:root{--paper:#FFFFFF;--ink:#1B1B1B;--muted:#5F5F5C;--line:#D9D8D3;--accent:#1F3A56;--tint:#F4F4F1}
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 10.5pt/1.55 Figtree,"Segoe UI",Arial,sans-serif;font-kerning:normal;hyphens:auto;overflow-wrap:break-word}
+@media screen{body{background:#E4E3DF}.page{margin:0 auto 8mm}}
+#flow{width:166mm}
+
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;background:var(--paper);break-after:page}
+.page:last-of-type{break-after:auto}
+.body{position:absolute;left:22mm;right:22mm;top:24mm;height:247mm}
+.page:first-of-type .body{top:20mm;height:251mm}
+
+.head,.foot{position:absolute;left:22mm;right:22mm;display:flex;justify-content:space-between;font-size:8pt;color:var(--muted);letter-spacing:.02em}
+.head{top:11mm;border-bottom:.4pt solid var(--line);padding-bottom:2mm}
+.foot{bottom:11mm}
+.foot b{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* Titre du document (page 1) */
+.doc{margin:0 0 9mm;padding-bottom:6mm;border-bottom:.6pt solid var(--ink)}
+.kick{font-size:8.5pt;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 3mm}
+h1{font:600 30pt/1.05 Cormorant,Georgia,serif;letter-spacing:-.01em;margin:0 0 4mm;max-width:150mm}
+.lead{font-size:12pt;line-height:1.5;color:var(--muted);margin:0 0 3mm;max-width:145mm}
+.meta{font-size:8.5pt;color:var(--muted);margin:0}
+
+/* Sommaire (sommaire: oui) : lignes cliquables, numéro de page à droite */
+.toc{margin:0 0 8mm;max-width:160mm}
+.toc-t{font-size:8pt;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 2mm}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{margin:0;padding:0;border-bottom:.4pt solid var(--line)}
+.toc a{display:flex;align-items:baseline;gap:3mm;padding:1.6mm 0;color:var(--ink);border:0}
+.toc .n{font-size:8.5pt;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.toc .t{flex:1}
+.toc .pg{font-variant-numeric:tabular-nums;color:var(--muted)}
+
+/* Titres */
+h1,h2,h3{white-space:pre-wrap} /* garde l'espace en fin de ligne : sinon les signets du PDF collent les mots (« sansoubli ») */
+h2{font:600 17pt/1.2 Cormorant,Georgia,serif;margin:7mm 0 3mm}
+.body > h2:first-child{margin-top:0}
+h2 .n{font:600 9pt Figtree,sans-serif;color:var(--accent);letter-spacing:.06em;font-variant-numeric:tabular-nums;margin-right:1.5mm}
+h3{font:600 10.5pt/1.4 Figtree,sans-serif;margin:4.5mm 0 1.5mm;color:var(--ink)}
+
+/* Texte */
+p,ul,ol,blockquote{max-width:160mm}
+p{margin:0 0 2.6mm}
+ul,ol{margin:0 0 3mm;padding-left:5.5mm}
+li{margin:0 0 1.2mm;padding-left:.8mm}
+li::marker{color:var(--accent)}
+ul.check{list-style:none;padding-left:0}
+ul.check li{padding-left:6.5mm;position:relative}
+ul.check li::before{content:"";position:absolute;left:0;top:.9mm;width:3.2mm;height:3.2mm;border:.7pt solid var(--muted);border-radius:.6mm}
+b{font-weight:600}
+a{color:var(--accent);text-decoration:none;border-bottom:.4pt solid currentColor}
+code{font:400 9pt Consolas,"Courier New",monospace;background:var(--tint);padding:0 .8mm;border-radius:.6mm}
+
+/* Encadrés et citations */
+.box{background:var(--tint);border-left:1.2pt solid var(--accent);padding:3.5mm 4.5mm;margin:4mm 0;break-inside:avoid;max-width:160mm}
+.box p{margin:0 0 1.4mm}.box p:last-child{margin:0}
+.box-t{font-size:8pt;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+blockquote{margin:4mm 0;padding-left:5mm;border-left:.6pt solid var(--line);font:italic 500 13pt/1.4 Cormorant,Georgia,serif;color:var(--ink)}
+blockquote p{margin:0 0 1.5mm}
+
+/* Tableaux : filets fins, aucune grille pleine */
+table{width:100%;border-collapse:collapse;margin:2mm 0 4.5mm;font-size:9.5pt;line-height:1.4}
+th{text-align:left;font-size:7.8pt;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:.7pt solid var(--ink);padding:0 3mm 1.8mm 0}
+td{border-bottom:.4pt solid var(--line);padding:2mm 3mm 2mm 0;vertical-align:top}
+.r{text-align:right;font-variant-numeric:tabular-nums}
+.c{text-align:center}
+th{hyphens:manual;overflow-wrap:normal} /* « RÉFÉRENCE » jamais coupé en « RÉFÉRENC / E » */
+tr.total td{border-top:.7pt solid var(--ink);border-bottom:0;font-weight:600}
+.champ{display:inline-block;min-width:32mm;border-bottom:.5pt solid var(--ink);height:1em;vertical-align:-.15em}
+
+/* Zone signature (---signature---) : deux blocs côte à côte, jamais coupés */
+.sign{display:flex;gap:10mm;margin:6mm 0 0;break-inside:avoid}
+.sign > div{flex:1;border:.5pt solid var(--line);padding:3mm 4mm;min-height:38mm}
+.sign p{margin:0 0 2mm}
+.sign .champ{min-width:20mm}
+.sign-t{font-size:8pt;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+th:last-child,td:last-child{padding-right:0}
+
+/* Zone Notes : remplit la fin de document plutôt qu'une demi-page blanche */
+.notes{margin-top:6mm;border-top:.6pt solid var(--ink);background:repeating-linear-gradient(transparent 0 8.5mm,var(--line) 8.5mm calc(8.5mm + .4pt))}
+.notes p{font-size:8pt;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:2mm 0 0;background:var(--paper);display:inline-block;padding-right:2mm}
+
+/* Crans de resserrage, posés par build.mjs seulement si cela supprime une dernière page presque vide */
+html[data-serre="1"] body{font-size:10pt;line-height:1.5}
+html[data-serre="1"] h2{margin:5.5mm 0 2.5mm}
+html[data-serre="2"] body{font-size:9.6pt;line-height:1.46}
+html[data-serre="2"] h2{margin:5mm 0 2mm}
+html[data-serre="2"] .doc{margin-bottom:7mm;padding-bottom:5mm}
+html[data-serre="2"] .box,html[data-serre="2"] blockquote{margin:3mm 0}
