@@ -90,3 +90,12 @@ html[data-serre="2"] body{font-size:9.6pt;line-height:1.46}
 html[data-serre="2"] h2{margin:5mm 0 2mm}
 html[data-serre="2"] .doc{margin-bottom:7mm;padding-bottom:5mm}
 html[data-serre="2"] .box,html[data-serre="2"] blockquote{margin:3mm 0}
+
+pre.code{font-family:"DejaVu Sans Mono",Consolas,monospace;line-height:1.35;white-space:pre;margin:2.5mm 0 3.5mm;padding:2mm 0 2mm 3.5mm;border-left:1.5px solid var(--accent, #1f3a5f);color:var(--ink);break-inside:avoid}
+
+/* tableau de 8 colonnes ou plus (classe .wide posée par build.mjs) : corps et en-têtes réduits */
+table.wide{font-size:7.4pt;line-height:1.3}
+table.wide th{font-size:5.6pt;letter-spacing:.02em;padding-right:1.5mm}
+table.wide td{padding-right:1.5mm;hyphens:auto;overflow-wrap:normal}
+table.wide td:nth-last-child(-n+2){min-width:13mm}
+table.wide td:nth-child(2){min-width:15mm}

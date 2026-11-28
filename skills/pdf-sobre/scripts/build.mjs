@@ -40,6 +40,12 @@ while (i < lines.length) {
     out.push('<div class="sign"><div><p>Fait à <span class="champ"></span> le <span class="champ"></span></p><p class="sign-t">Le prestataire</p></div><div><p>Bon pour accord, date et signature</p><p class="sign-t">Le client</p></div></div>');
     i++; continue;
   }
+  if (l.startsWith('```')) { // bloc de texte à chasse fixe (schémas, formules), taille ajustée à la ligne la plus longue
+    const q = []; i++; while (i < lines.length && !lines[i].startsWith('```')) q.push(lines[i++]); i++;
+    const L = Math.max(...q.map(x => x.length), 1), fs = Math.min(8.5, 470 / (L * 0.6)).toFixed(2);
+    { const k = out.length - 1; if (k >= 0 && /^<p>/.test(out[k]) && out[k].length < 220) out[k] = out[k].replace(/^<p>/, '<p data-keep="1">'); } // la phrase qui annonce le schéma reste avec lui
+    out.push(`<pre class="code" style="font-size:${fs}pt">${esc(q.join('\n'))}</pre>`); continue;
+  }
   if (/^# /.test(l)) {
     title = l.slice(2).trim();
     const ld = []; let j = i + 1;
@@ -72,7 +78,7 @@ while (i < lines.length) {
     const al = cells(sep).map(c => /^:-+:$/.test(c) ? 'c' : /-:$/.test(c) ? 'r' : ''); // :---: centre, ---: droite (chiffres)
     const td = (c, k, tag) => `<${tag}${al[k] ? ` class="${al[k]}"` : ''}>${inl(c)}</${tag}>`;
     const tr = (r, k) => `<tr${k === b.length - 1 && /^(\*\*)?total/i.test(cells(r)[0]) ? ' class="total"' : ''}>${cells(r).map((c, k) => td(c, k, 'td')).join('')}</tr>`; // dernière ligne « Total » : filet au-dessus
-    out.push(`<table data-split="tbody"><thead><tr>${cells(h).map((c, k) => td(c, k, 'th')).join('')}</tr></thead><tbody>${b.map(tr).join('')}</tbody></table>`);
+    out.push(`<table data-split="tbody"${cells(h).length >= 8 ? ' class="wide"' : ''}><thead><tr>${cells(h).map((c, k) => td(c, k, 'th')).join('')}</tr></thead><tbody>${b.map(tr).join('')}</tbody></table>`);
     continue;
   }
   const li = l.match(/^(- \[ \] |- |(\d+)\. )(.*)$/);
@@ -91,7 +97,9 @@ while (i < lines.length) {
   }
   const p = [l]; while (i + 1 < lines.length && lines[i + 1].trim() && !/^(#|>|\||- |\d+\. |---(page|signature)---)/.test(lines[i + 1])) p.push(lines[++i]);
   const txt = p.join(' ');
-  out.push(`<p${/:\s*$/.test(txt) ? ' data-keep="1"' : ''}>${inl(txt)}</p>`); // phrase qui annonce la suite : jamais seule en bas de page
+  { const h = inl(txt), keep = /:\s*$/.test(txt); // paragraphe long : coupable entre deux phrases
+    if (h.length > 500) { const sp = h.split(/(?<=[.;!?»)])\s+(?![^<>]*>)/); if (keep && sp.length > 2) sp.push(sp.splice(-2).join(' ')); out.push(`<p data-split="self">${sp.map(x => `<span>${x} </span>`).join('')}</p>`); }
+    else out.push(`<p${keep ? ' data-keep="1"' : ''}>${h}</p>`); }
   i++;
 }
 
@@ -183,6 +191,7 @@ function paginate() {
     if (!over(el)) continue;
     el.remove();
     if (el.dataset.split && split(el, fresh ? 1 : 2)) { newPage(); queue.unshift(el); continue; }
+    if (el.dataset.split && !el.dataset.tried) { el.dataset.tried = '1'; if (!fresh) newPage(); queue.unshift(el); continue; } // retente la coupe en haut de la page suivante
     if (!fresh) newPage();
     body.append(el); // trop grand même seul : signalé par render.mjs
   }

@@ -5,7 +5,7 @@
 <p align="center">
   <img alt="Licence MIT" src="https://img.shields.io/badge/licence-MIT-2F5BFF?style=flat-square">
   <img alt="Skill Claude" src="https://img.shields.io/badge/Claude-skill-060A14?style=flat-square">
-  <img alt="Version 1.3.0" src="https://img.shields.io/badge/version-1.3.0-8E9AB2?style=flat-square">
+  <img alt="Version 1.4.0" src="https://img.shields.io/badge/version-1.4.0-8E9AB2?style=flat-square">
 </p>
 
 # pdf-sobre — PDF Sobre
@@ -17,7 +17,7 @@
 
 | | |
 |---|---|
-| **Mise en pages automatique** | Pas de page vide, pas de titre seul en bas de page, resserrage automatique de la dernière page. |
+| **Mise en pages automatique** | Pas de page vide, pas de titre seul en bas de page, resserrage automatique de la dernière page, longs paragraphes coupés entre deux phrases, tableaux larges resserrés. |
 | **Lisible partout** | Signets, liens cliquables, sommaire cliquable, métadonnées, PDF balisé pour l'accessibilité. |
 | **Un style, une charte** | Papier blanc, encre presque noire, un accent bleu encre, Cormorant Garamond et Figtree ; charte client en tête du `:root`. |
 | **Contrôles bloquants** | Nombre de pages tenu, remplissage minimal, rendu PNG par page. |

@@ -28,3 +28,9 @@ Style inchangé ; seulement ce qui sert dans un PDF (rien d'animé).
 - SKILL.md : « sans rien ajouter », info absente en `___` ou `<A_REMPLIR>`, règle non vérifiée en INCONNU, contrôle des PNG écrit dans le fichier de rendu.
 - Essais : exemple.md inchangé (2 pages, 97 et 91 %, 8 signets conformes) ; compte rendu avec apostrophe, tableau centré, total, signature (1 page, OK) ; tableau de 70 lignes sur 4 pages : colonnes identiques, en-tête répété (page 4 à 21 % refusée à juste titre).
 - Non fait : réglage manuel des largeurs de colonnes (la mesure automatique suffit pour les cas du banc).
+
+## 1.4.0 (2026-11-28, correctifs issus de vrais documents e-commerce)
+- build.mjs : blocs de code (trois accents graves) rendus en `pre.code` à taille ajustée ; paragraphe de plus de 500 caractères coupable entre phrases (`data-split="self"` + un `span` par phrase ; la phrase d'annonce finissant par « : » reste avec la suivante) ; une coupe refusée en bas de page est retentée en haut de la page suivante ; tableau de 8 colonnes ou plus marqué `class="wide"`.
+- sobre.css : `pre.code` ; `table.wide` (7,4 pt, en-têtes 5,6 pt, césure dans les cellules, largeur minimale de 13 mm sur les 2 dernières colonnes et 15 mm sur la 2e).
+- La réduction de police ne touche que les tableaux larges ; les autres tableaux ne changent pas.
+- Essais : exemple.md inchangé (2 pages) ; tableau de 9 colonnes : classe `wide` posée.

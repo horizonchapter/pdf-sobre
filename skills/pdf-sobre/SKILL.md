@@ -54,6 +54,10 @@ Nom : ___           (trois _ ou plus = champ à remplir à la main)
 ```
 Une phrase qui finit par « : » reste toujours collée à ce qu'elle annonce.
 Lien vers une section du document : `[voir les contrôles](#les-controles-dans-l-ordre)`, l'ancre est le titre `##` en minuscules, sans accents, mots reliés par des tirets. Un document à imprimer écrit aussi l'adresse lisible dans le texte : sur papier, un lien ne se clique pas.
+Bloc de texte à chasse fixe (schéma, formule) : entouré de trois accents graves ; la taille s'ajuste à la ligne la plus longue et la phrase qui l'annonce reste avec lui.
+Paragraphe de plus de 500 caractères : coupé automatiquement entre deux phrases (jamais au milieu d'une phrase) si une page le demande.
+Tableau de 8 colonnes ou plus : police réduite (corps 7,4 pt, en-têtes 5,6 pt), césure dans les cellules, largeur minimale de 13 mm sur les colonnes étroites.
+Texte à rendre identique : ne pas écrire `sommaire: oui` ; un sommaire ajoute des lignes et peut décaler la mise en pages.
 
 ## Ce que le PDF contient sans rien régler
 Un PDF ne s'anime pas ; ce qui le rend agréable à l'écran, c'est la navigation. Chaque PDF sort avec :
